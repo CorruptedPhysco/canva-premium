@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Join Canva Team</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f2f2f2;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    #joinBtn {
+      padding: 15px 30px;
+      font-size: 18px;
+      background-color: #00c4cc;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      display: none;
+      text-decoration: none;
+    }
+    #joinBtn:hover {
+      background-color: #00a9b0;
+    }
+    #error {
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <a id="joinBtn" target="_blank">Join Canva Team</a>
+  <p id="error"></p>
+
+  <script>
+    fetch('https://your-api-url.com/getlink')  // Replace with your actual API
+      .then(res => res.text())
+      .then(link => {
+        // Remove quotes if present
+        const cleanLink = link.replace(/^"|"$/g, "");
+        const btn = document.getElementById("joinBtn");
+        btn.href = cleanLink;
+        btn.style.display = "inline-block";
+      })
+      .catch(err => {
+        document.getElementById("error").textContent = "Failed to load link.";
+        console.error(err);
+      });
+  </script>
+
+</body>
+</html>
